@@ -1,0 +1,29 @@
+{
+  "question": "Does a class-balanced, momentum-accumulated federated update beat a standard FedAvg baseline when clients hold sparse, scarce and non-IID data?",
+  "method": "Simulated federated learning on the bundled breast-cancer dataset: Dirichlet label-skew partition, random feature masks per client, identical local SGD and round budget; both methods evaluated on one shared stratified hold-out test set over several seeds.",
+  "dataset": {
+    "name": "scikit-learn breast cancer (load_breast_cancer)",
+    "source_url": "https://scikit-learn.org/stable/datasets/toy_dataset.html",
+    "n_rows": 569,
+    "n_train": 455,
+    "n_test": 114,
+    "same_as_paper": false,
+    "baseline_is_papers_method": false
+  },
+  "metric_name": "macro-F1 on shared test set",
+  "higher_is_better": true,
+  "baseline": "Standard FedAvg with a logistic-regression model trained by local SGD, averaged by sample count.",
+  "improved": "Same local model and data, plus class-balanced local loss weights, server-side momentum (accumulative) update, and aggregation weights that down-weight clients with very few samples.",
+  "metrics": {
+    "baseline_score": 0.9656600617687726,
+    "baseline_score_std": 0.00857527636279986,
+    "baseline_accuracy": 0.9678362573099415,
+    "baseline_minority_recall": 0.9682539682539683,
+    "improved_score": 0.9657535775787038,
+    "improved_score_std": 0.008640637129803458,
+    "improved_accuracy": 0.9678362573099415,
+    "improved_minority_recall": 0.9761904761904762,
+    "improvement": 9.351580993122166e-05
+  },
+  "notes": "Stand-in baseline/improvement inspired by accumulative learning; the Safa paper's exact update was not re-implemented. Hyperparameters were fixed a priori (no tuning, so no test-set selection). Feature scaler is fit on the pooled training split (a simplification of a real federated setting). The test set is small, so differences are noisy; only three seeds were run. Results do not test the paper's own claims or dataset."
+}
