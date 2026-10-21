@@ -24,6 +24,26 @@ python analysis.py
 ## Results
 Results are written to `results.json` (and a comparison chart to `figures/`) when `analysis.py` finishes.
 
+## Results (latest run)
+
+On the scikit-learn breast cancer dataset, a standard FedAvg logistic-regression baseline reached 96.6% macro-F1 on the shared held-out test set, while the class-balanced, momentum-accumulated variant reached 96.6%, a negligible difference within seed noise (std about 0.9 points, three seeds).
+
+| Metric | Value |
+|---|---|
+| baseline_score | 0.9657 |
+| baseline_score_std | 0.008575 |
+| baseline_accuracy | 0.9678 |
+| baseline_minority_recall | 0.9683 |
+| improved_score | 0.9658 |
+| improved_score_std | 0.008641 |
+| improved_accuracy | 0.9678 |
+| improved_minority_recall | 0.9762 |
+| improvement | 0.00009352 |
+
+Run on 2026-10-21. Full output: [results.json](results.json) · [run.log](run.log)
+
+Notes: Stand-in baseline/improvement inspired by accumulative learning; the Safa paper's exact update was not re-implemented. Hyperparameters were fixed a priori (no tuning, so no test-set selection). Feature scaler is fit on the pooled training split (a simplification of a real federated setting). The test set is small, so differences are noisy; only three seeds were run. Results do not test the paper's own claims or dataset.
+
 ## Reference
 
 This project is motivated by the following paper:
